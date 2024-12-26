@@ -4,7 +4,7 @@ import React from 'react'
 const Loader = () => {
   return (
     <div className='flex-center h-screen w-full'>
-        <Image priority={true} src={"icons/loading-circle.svg"} alt='Loading....' height={50} width={50}></Image>
+        <Image priority={true} src={"/icons/loading-circle.svg"} alt='Loading....' height={50} width={50}></Image>
       
     </div>
   )
