@@ -8,6 +8,7 @@ import {
     StreamVideo,
     StreamVideoClient,
 } from "@stream-io/video-react-sdk";
+import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 
 
@@ -16,11 +17,15 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     const userId = "user-id";
     
     const [videoClient, setVideoClient] = useState<StreamVideoClient>();
-    
+    const router=useRouter()
     const { user, isLoaded } = useUser();
+
     
     useEffect(() => {
+
+        if (!isLoaded || !user) router.push('/sign-in');
         if (!isLoaded || !user) return;
+
         if (!apiKey) throw new Error("Stream API key missing !");
         const client = new StreamVideoClient({
             apiKey,

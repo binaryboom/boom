@@ -20,7 +20,7 @@ import {
 
 import { cn } from '@/lib/utils';
 import { LayoutList, Users, Users2 } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import EndCallButton from './EndCallButton';
 import Loader from './Loader';
 
@@ -36,7 +36,7 @@ const MeetingRoom = () => {
     const callingState = useCallCallingState();
     if (callingState !== CallingState.JOINED) return <Loader />
 
-  
+  const router=useRouter()
 
     const CallLayout = () => {
         switch (layout) {
@@ -66,7 +66,7 @@ const MeetingRoom = () => {
             </div>
 
             <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
-                <CallControls />
+                <CallControls onLeave={()=>{router.push('/')}} />
                 <DropdownMenu>
                     <div className="flex items-center">
                         <DropdownMenuTrigger className='cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4v535b]'>
