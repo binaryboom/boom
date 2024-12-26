@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeCard from './HomeCard';
 import { useRouter } from 'next/navigation';
 import MeetingModal from './MeetingModal';
@@ -29,6 +29,7 @@ const MeetingTypeList = () => {
 
   const {user}=useUser();
   const client=useStreamVideoClient()
+  
 
   const createMeeting = async () => {
     if(!values.dateTime) {
@@ -78,6 +79,8 @@ const MeetingTypeList = () => {
 
   const meetingLink=`${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
 
+  
+  
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
       <HomeCard
