@@ -23,7 +23,7 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     
     useEffect(() => {
 
-        if (isLoaded || !user) router.push('/sign-in');
+        if (!user) router.push('/sign-in');
         if (!isLoaded || !user) return;
 
         if (!apiKey) throw new Error("Stream API key missing !");
