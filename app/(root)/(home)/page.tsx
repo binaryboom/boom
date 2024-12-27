@@ -1,16 +1,39 @@
 "use client"
 import MeetingTypeList from '@/components/MeetingTypeList';
 import { useGetCalls } from '@/hooks/use-getCalls';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 const Home = () => {
   const now = new Date();
   const {upcomingCalls}=useGetCalls();
-  console.log('uc',upcomingCalls)
+  // console.log('uc',upcomingCalls)
 
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-  const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
+  // const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  // const date = (new Intl.DateTimeFormat('en-US', { dateStyle: 'full' })).format(now);
+  const [time, setTime] = useState(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+  const [date, setDate] = useState(new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(new Date()));
+
+  // Update time every second
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+    }, 5000);
+
+    return () => clearInterval(timeInterval);
+  }, []);
+
+  // Update date once per day
+  useEffect(() => {
+    const now = new Date();
+    const timeUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime() - now.getTime();
+
+    const dateTimeout = setTimeout(() => {
+      setDate(new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(new Date()));
+    }, timeUntilMidnight);
+
+    return () => clearTimeout(dateTimeout);
+  }, []);
 
   return (
     <section className="flex size-full flex-col gap-5 text-white">

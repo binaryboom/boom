@@ -149,7 +149,7 @@ const MeetingTypeList = () => {
         
       ):(
         <MeetingModal isOpen={meetingState === 'isScheduleMeeting'}
-          onClose={() => setMeetingState(undefined)} title="Meeting Created" className="text-center" buttonText="Copy Meeting Link" handleClick={()=>{
+          onClose={() =>{ setMeetingState(undefined);setValues({ ...values, description: '' })}} title="Meeting Created" className="text-center" buttonText="Copy Meeting Link" handleClick={()=>{
             navigator.clipboard.writeText(meetingLink);
             toast({
               title: "Link Copied !!",
