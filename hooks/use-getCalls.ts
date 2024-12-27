@@ -26,6 +26,15 @@ export const useGetCalls = () => {
               { members: { $in: [user.id] } },
             ],
           },
+
+          // filter_conditions: {
+          //   $or: [
+          //     { created_by_user_id: user.id },
+          //     { members: { $in: [user.id] } },
+          //   ],
+          // },
+          // sort: [{ field: 'created_at', direction: -1 }],
+
         });
 
         setCalls(calls);
@@ -44,6 +53,8 @@ export const useGetCalls = () => {
   const endedCalls = calls?.filter(({ state: { startsAt, endedAt } }: Call) => {
     return (startsAt && new Date(startsAt) < now) || !!endedAt
   })
+  // const endedCalls=calls;
+
 
   const upcomingCalls = calls?.filter(({ state: { startsAt } }: Call) => {
     return startsAt && new Date(startsAt) > now

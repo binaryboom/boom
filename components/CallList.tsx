@@ -87,14 +87,14 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
             }
             isPreviousMeeting={type === 'ended'}
             link={
-              type === 'recordings'
+              type === 'recordings' 
                 ? (meeting as CallRecording).url
                 : `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${(meeting as Call).id}`
             }
             buttonIcon1={type === 'recordings' ? '/icons/play.svg' : undefined}
-            buttonText={type === 'recordings' ? 'Play' : 'Start'}
+            buttonText={type === 'recordings' ? 'Play' : type === 'ended' ? 'Re Join':'Start'}
             handleClick={
-              type === 'recordings'
+              type === 'recordings' 
                 ? () => router.push(`${(meeting as CallRecording).url}`)
                 : () => router.push(`/meeting/${(meeting as Call).id}`)
             }

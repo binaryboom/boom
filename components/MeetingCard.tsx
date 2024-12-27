@@ -58,7 +58,7 @@ const MeetingCard = ({
             +5
           </div>
         </div>
-        {!isPreviousMeeting && (
+        {/* {!isPreviousMeeting && ( */}
           <div className="flex gap-2">
             <Button onClick={handleClick} className="rounded bg-blue-1 px-6">
               {buttonIcon1 && (
@@ -84,7 +84,7 @@ const MeetingCard = ({
               &nbsp; Copy Link
             </Button>
           </div>
-        )}
+        {/* )} */}
       </article>
     </section>
   );
